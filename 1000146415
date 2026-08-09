@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>לוח חופשות וגיבויים לצוות</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>לוח חופשות וגיבויים</h1>
+      <p>מעקב חופשות, עומס וגיבוי לצוות</p>
+    </div>
+    <div class="header-actions">
+      <button id="addLeaveBtn" class="primary">+ הוספת חופשה</button>
+      <button id="addCoverageBtn">+ הוספת גיבוי</button>
+      <button id="manageStaffBtn">ניהול צוות</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="clinicSyncAlert" class="clinic-sync-alert hidden" aria-live="polite"></section>
+    <section id="coverageAlert" class="coverage-alert hidden" aria-live="polite"></section>
+
+    <section class="toolbar card">
+      <div class="view-switch" role="tablist" aria-label="בחירת תצוגה">
+        <button data-view="week" class="active">שבוע</button>
+        <button data-view="month">חודש</button>
+        <button data-view="year">שנה</button>
+        <button data-view="reports">דוחות</button>
+      </div>
+      <div class="date-nav" id="dateNav">
+        <button id="prevPeriodBtn" aria-label="הקודם">‹</button>
+        <strong id="periodTitle"></strong>
+        <button id="nextPeriodBtn" aria-label="הבא">›</button>
+        <button id="todayBtn">היום</button>
+      </div>
+    </section>
+
+    <section class="legend card">
+      <span><i class="dot green"></i> עובד אחד בחופש</span>
+      <span><i class="dot orange"></i> שני עובדים בחופש</span>
+      <span><i class="dot red"></i> שלושה ומעלה בחופש</span>
+      <span><i class="dot gray"></i> גיבוי</span>
+      <span><i class="dot unresolved"></i> חופש ללא גיבוי</span>
+    </section>
+
+    <section id="content" class="card content-card"></section>
+  </main>
+
+  <dialog id="leaveDialog">
+    <form id="leaveForm" method="dialog" class="dialog-form">
+      <div class="dialog-title-row">
+        <h2 id="leaveDialogTitle">הוספת חופשה</h2>
+        <button type="button" class="icon-btn" data-close="leaveDialog">✕</button>
+      </div>
+      <label>עובד/ת
+        <select id="leaveStaff" required></select>
+      </label>
+      <div class="two-cols">
+        <label>מתאריך
+          <input id="leaveStart" type="date" required />
+        </label>
+        <label>עד תאריך
+          <input id="leaveEnd" type="date" required />
+        </label>
+      </div>
+      <label>הערה
+        <input id="leaveNote" type="text" placeholder="אופציונלי" />
+      </label>
+      <p class="hint">כל חופשה — גם של עובד אחד ליום אחד — מחייבת גיבוי. לאחר השמירה תיפתח דרישת גיבוי אם קיימים ימים ללא גיבוי.</p>
+      <div class="dialog-actions">
+        <button type="button" id="deleteLeaveBtn" class="danger hidden">מחיקת חופשה</button>
+        <button type="button" data-close="leaveDialog">ביטול</button>
+        <button type="submit" class="primary">שמירת חופשה</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="coverageDialog">
+    <form id="coverageForm" method="dialog" class="dialog-form">
+      <div class="dialog-title-row">
+        <h2 id="coverageDialogTitle">הוספת גיבוי</h2>
+        <button type="button" class="icon-btn" data-close="coverageDialog">✕</button>
+      </div>
+      <div id="coverageReason" class="coverage-reason hidden"></div>
+      <label>המגבה
+        <select id="coverageStaff" required></select>
+      </label>
+      <div class="two-cols">
+        <label>מתאריך
+          <input id="coverageStart" type="date" required />
+        </label>
+        <label>עד תאריך
+          <input id="coverageEnd" type="date" required />
+        </label>
+      </div>
+      <div class="two-cols">
+        <label>משעה
+          <input id="coverageFrom" type="time" required />
+        </label>
+        <label>עד שעה
+          <input id="coverageTo" type="time" required />
+        </label>
+      </div>
+      <label>הערה
+        <input id="coverageNote" type="text" placeholder="אופציונלי" />
+      </label>
+      <p class="hint">ניתן להזין יותר ממגבה אחד לאותו יום. המערכת דורשת לפחות גיבוי אחד לכל יום שבו יש לפחות עובד אחד בחופש.</p>
+      <div class="dialog-actions">
+        <button type="button" id="deleteCoverageBtn" class="danger hidden">מחיקת גיבוי</button>
+        <button type="button" data-close="coverageDialog">סגירה</button>
+        <button type="submit" class="primary">שמירת גיבוי</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="staffDialog">
+    <div class="dialog-form">
+      <div class="dialog-title-row">
+        <h2>ניהול צוות</h2>
+        <button type="button" class="icon-btn" data-close="staffDialog">✕</button>
+      </div>
+      <form id="staffForm" class="inline-form">
+        <input id="staffName" type="text" placeholder="שם איש/אשת צוות" required />
+        <button type="submit" class="primary">הוספה</button>
+      </form>
+      <div id="staffList" class="staff-list"></div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
