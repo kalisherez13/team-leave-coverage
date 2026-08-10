@@ -539,4 +539,59 @@ document.getElementById('staffForm').addEventListener('submit', async e=>{
   input.value='';
   const {error}=await sb.from('staff').insert({name});
   if(error){ alert('שגיאה בהוספת איש/אשת צוות: '+error.message); return; }
-  aw
+  await fetchAllData(); renderStaffList(); refreshStaffSelects(); render();
+});
+
+document.getElementById('leaveForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const staffId=document.getElementById('leaveStaff').value, start=document.getElementById('leaveStart').value, end=document.getElementById('leaveEnd').value, note=document.getElementById('leaveNote').value.trim();
+  if(!staffId||!start||!end) return; if(end<start){ alert('תאריך הסיום חייב להיות זהה או מאוחר מתאריך ההתחלה.'); return; }
+  document.getElementById('leaveDialog').close(); document.getElementById('leaveForm').reset();
+  if(editingLeaveId){
+    const id=editingLeaveId; editingLeaveId=null;
+    const {error}=await sb.from('leaves').update({staff_id:staffId,start_date:start,end_date:end,note}).eq('id', id);
+    if(error){ alert('שגיאה בעדכון החופשה: '+error.message); return; }
+  } else {
+    const {data, error}=await sb.from('leaves').insert({staff_id:staffId,start_date:start,end_date:end,note}).select().single();
+    if(error){ alert('שגיאה בהוספת החופשה: '+error.message); return; }
+    const {error:syncErr}=await sb.from('pending_clinic_sync').insert({leave_id:data.id});
+    if(syncErr) console.error(syncErr);
+  }
+  await fetchAllData(); render();
+});
+
+document.getElementById('coverageForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const staffId=document.getElementById('coverageStaff').value, start=document.getElementById('coverageStart').value, end=document.getElementById('coverageEnd').value, from=document.getElementById('coverageFrom').value, to=document.getElementById('coverageTo').value, note=document.getElementById('coverageNote').value.trim();
+  if(!staffId||!start||!end||!from||!to) return; if(end<start){ alert('תאריך הסיום חייב להיות זהה או מאוחר מתאריך ההתחלה.'); return; }
+  document.getElementById('coverageDialog').close(); document.getElementById('coverageForm').reset();
+  if(editingCoverageId){
+    const id=editingCoverageId; editingCoverageId=null;
+    const {error}=await sb.from('coverages').update({staff_id:staffId,start_date:start,end_date:end,from_time:from,to_time:to,note}).eq('id', id);
+    if(error){ alert('שגיאה בעדכון הגיבוי: '+error.message); return; }
+  } else {
+    const {error}=await sb.from('coverages').insert({staff_id:staffId,start_date:start,end_date:end,from_time:from,to_time:to,note});
+    if(error){ alert('שגיאה בהוספת הגיבוי: '+error.message); return; }
+  }
+  await fetchAllData(); render();
+});
+
+async function init(){
+  content.innerHTML='<div class="empty">טוען נתונים משותפים…</div>';
+  const ok=await fetchAllData();
+  refreshStaffSelects();
+  if(ok) render();
+  subscribeRealtime();
+}
+init();
+
+function updateHeaderHeightVar(){
+  const header = document.querySelector('.app-header');
+  if(header) document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+}
+updateHeaderHeightVar();
+window.addEventListener('resize', updateHeaderHeightVar);
+
+</script>
+</body>
+</html>
