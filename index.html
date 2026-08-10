@@ -50,6 +50,7 @@ main{max-width:1500px;margin:22px auto;padding:0 18px 40px}
 .event-row{display:grid;grid-template-columns:repeat(7,minmax(110px,1fr));gap:6px;min-height:38px;margin-bottom:5px}
 .event-segment{border-radius:9px;padding:7px 10px;font-size:13px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid transparent}.leave-green{background:var(--green-bg);color:#166534;border-color:#86efac}.leave-orange{background:var(--orange-bg);color:#9a3412;border-color:#fdba74}.leave-red{background:var(--red-bg);color:#991b1b;border-color:#fca5a5}.coverage-segment{background:var(--gray-bg);color:#344054;border-color:#cfd4dc}.unresolved-segment{box-shadow:inset 0 -3px 0 #7c3aed}
 
+.month-weekday-head{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:7px;position:sticky;top:var(--header-height,86px);background:#fff;z-index:3;padding-bottom:6px}
 .month-grid{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:7px}.month-weekday{font-size:12px;color:var(--muted);text-align:center;padding:5px}.month-day{min-height:125px;border:1px solid var(--border);border-radius:12px;padding:7px;background:#fff}.month-day.outside{opacity:.35}.month-day.today{outline:2px solid var(--blue)}.month-day-num{font-weight:700;margin-bottom:6px}.mini-chip{display:block;border-radius:7px;padding:4px 6px;margin:4px 0;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.coverage-chip{background:var(--gray-bg);color:#344054}.missing-badge{display:inline-block;background:#f4ebff;color:#6941c6;padding:2px 6px;border-radius:999px;font-size:10px;margin-top:3px}
 
 .year-grid{display:grid;grid-template-columns:repeat(3,minmax(280px,1fr));gap:14px}.mini-month{border:1px solid var(--border);border-radius:14px;padding:12px}.mini-month h3{margin:0 0 9px}.mini-month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}.mini-day{aspect-ratio:1/1;border-radius:5px;background:#f2f4f7;font-size:9px;display:flex;align-items:center;justify-content:center;position:relative}.mini-day.green{background:var(--green-bg);color:#166534}.mini-day.orange{background:var(--orange-bg);color:#9a3412}.mini-day.red{background:var(--red-bg);color:#991b1b}.mini-day.missing::after{content:"";position:absolute;bottom:1px;width:5px;height:2px;border-radius:2px;background:#7c3aed}.mini-day.has-coverage::before{content:"";position:absolute;top:1px;width:4px;height:4px;border-radius:50%;background:var(--gray)}
@@ -61,12 +62,12 @@ dialog{border:none;border-radius:18px;width:min(560px,94vw);padding:0;box-shadow
 .event-segment{cursor:pointer}.event-segment:hover{filter:brightness(0.95)}.mini-chip{cursor:pointer}.mini-chip:hover{filter:brightness(0.95)}
 .missing-badge{cursor:pointer}.missing-badge:hover{filter:brightness(0.95)}.add-coverage-day-btn{display:block;width:100%;margin-top:5px;border:1px dashed var(--border);background:transparent;border-radius:7px;padding:3px 6px;font-size:10px;color:var(--muted);cursor:pointer}.add-coverage-day-btn:hover{border-color:var(--blue);color:var(--blue);background:#eff6ff}
 
-@media(max-width:900px){.app-header{align-items:flex-start;flex-direction:column}.year-grid{grid-template-columns:1fr}.report-summary{grid-template-columns:1fr 1fr}.week-head,.event-row{grid-template-columns:repeat(7,minmax(90px,1fr))}.month-grid{grid-template-columns:repeat(7,minmax(90px,1fr))}.content-card{padding:10px}}
+@media(max-width:900px){.app-header{align-items:flex-start;flex-direction:column}.year-grid{grid-template-columns:1fr}.report-summary{grid-template-columns:1fr 1fr}.week-head,.event-row{grid-template-columns:repeat(7,minmax(90px,1fr))}.month-weekday-head,.month-grid{grid-template-columns:repeat(7,minmax(90px,1fr))}.content-card{padding:10px}}
 @media(max-width:480px){
   main{padding:0 6px 24px}
   .app-header{padding:14px 12px}
   .content-card{padding:6px}
-  .week-head,.event-row,.month-grid{grid-template-columns:repeat(7,1fr);gap:3px}
+  .week-head,.event-row,.month-weekday-head,.month-grid{grid-template-columns:repeat(7,1fr);gap:3px}
   .day-head{padding:4px 1px;border-radius:8px}
   .day-head .date{font-size:14px}
   .day-head .dow{font-size:8px}
@@ -206,8 +207,12 @@ dialog{border:none;border-radius:18px;width:min(560px,94vw);padding:0;box-shadow
     </div>
   </dialog>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-const STORAGE_KEY = 'team_leave_coverage_v2';
+const SUPABASE_URL = 'https://ttzhbofpynlbsqluxmyl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0emhib2ZweW5sYnNxbHV4bXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzNDU1MjQsImV4cCI6MjEwMTkyMTUyNH0.wDSx3PFPDmAlyhg4m4gfp4OpnC612pjTlLCekknxm6s';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 const DAYS_HE = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳'];
 const MONTHS_HE = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 
@@ -219,7 +224,7 @@ const initialState = {
   pendingClinicSync: []
 };
 
-let state = loadState();
+let state = structuredClone(initialState);
 let currentView = 'week';
 let anchorDate = startOfDay(new Date());
 let editingLeaveId = null;
@@ -231,14 +236,43 @@ const coverageAlert = document.getElementById('coverageAlert');
 const clinicSyncAlert = document.getElementById('clinicSyncAlert');
 const dateNav = document.getElementById('dateNav');
 
-function loadState(){
-  try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return parsed ? {...initialState, ...parsed, settings:{...initialState.settings, ...(parsed.settings||{})}} : structuredClone(initialState);
-  } catch { return structuredClone(initialState); }
+function mapStaffRow(r){ return {id:r.id, name:r.name}; }
+function mapLeaveRow(r){ return {id:r.id, staffId:r.staff_id, start:r.start_date, end:r.end_date, note:r.note||''}; }
+function mapCoverageRow(r){ return {id:r.id, staffId:r.staff_id, start:r.start_date, end:r.end_date, from:r.from_time, to:r.to_time, note:r.note||''}; }
+
+async function fetchAllData(){
+  const [staffRes, leavesRes, covRes, syncRes] = await Promise.all([
+    sb.from('staff').select('*').order('name'),
+    sb.from('leaves').select('*'),
+    sb.from('coverages').select('*'),
+    sb.from('pending_clinic_sync').select('*')
+  ]);
+  if(staffRes.error||leavesRes.error||covRes.error||syncRes.error){
+    console.error(staffRes.error||leavesRes.error||covRes.error||syncRes.error);
+    content.innerHTML='<div class="empty">שגיאה בטעינת הנתונים מהשרת. בדוק חיבור לאינטרנט ורענן.</div>';
+    return false;
+  }
+  state.staff=(staffRes.data||[]).map(mapStaffRow);
+  state.leaves=(leavesRes.data||[]).map(mapLeaveRow);
+  state.coverages=(covRes.data||[]).map(mapCoverageRow);
+  state.pendingClinicSync=(syncRes.data||[]).map(r=>r.leave_id);
+  return true;
 }
-function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-function uid(prefix='id'){ return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2,8)}`; }
+
+let refreshTimer=null;
+function scheduleRefresh(){
+  clearTimeout(refreshTimer);
+  refreshTimer=setTimeout(async()=>{ await fetchAllData(); refreshStaffSelects(); render(); }, 200);
+}
+function subscribeRealtime(){
+  sb.channel('team-leave-coverage-sync')
+    .on('postgres_changes',{event:'*',schema:'public',table:'staff'},scheduleRefresh)
+    .on('postgres_changes',{event:'*',schema:'public',table:'leaves'},scheduleRefresh)
+    .on('postgres_changes',{event:'*',schema:'public',table:'coverages'},scheduleRefresh)
+    .on('postgres_changes',{event:'*',schema:'public',table:'pending_clinic_sync'},scheduleRefresh)
+    .subscribe();
+}
+
 function startOfDay(d){ const x=new Date(d); x.setHours(0,0,0,0); return x; }
 function parseDate(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
 function toISO(d){ const x=startOfDay(d); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`; }
@@ -276,20 +310,22 @@ function updateCoverageAlert(){
   document.getElementById('resolveCoverageBtn').onclick=()=>openCoverageForDates(first,last,true);
 }
 function renderClinicSyncAlert(){
-  let pendingLeaves=state.pendingClinicSync.map(id=>state.leaves.find(l=>l.id===id)).filter(Boolean);
-  if(pendingLeaves.length!==state.pendingClinicSync.length){ state.pendingClinicSync=pendingLeaves.map(l=>l.id); saveState(); }
+  const pendingLeaves=state.pendingClinicSync.map(id=>state.leaves.find(l=>l.id===id)).filter(Boolean);
   if(!pendingLeaves.length){ clinicSyncAlert.classList.add('hidden'); clinicSyncAlert.innerHTML=''; return; }
-  pendingLeaves=pendingLeaves.slice().sort((a,b)=>a.start.localeCompare(b.start));
-  let html=`<div class="sync-header">💡 יש ${pendingLeaves.length} ${pendingLeaves.length===1?'חופשה חדשה שטרם הוזנה':'חופשות חדשות שטרם הוזנו'} למערכת הקליניקה — יש לסמן ✔ אחרי ההזנה:</div><div class="sync-list">`;
-  pendingLeaves.forEach(l=>{
+  const sorted=pendingLeaves.slice().sort((a,b)=>a.start.localeCompare(b.start));
+  let html=`<div class="sync-header">💡 יש ${sorted.length} ${sorted.length===1?'חופשה חדשה שטרם הוזנה':'חופשות חדשות שטרם הוזנו'} למערכת הקליניקה — יש לסמן ✔ אחרי ההזנה:</div><div class="sync-list">`;
+  sorted.forEach(l=>{
     const range = l.start===l.end ? formatDate(parseDate(l.start)) : `${formatDate(parseDate(l.start))}–${formatDate(parseDate(l.end))}`;
     html+=`<div class="sync-item"><span>${escapeHtml(staffName(l.staffId))} · ${range}</span><button type="button" class="sync-done-btn" data-mark-synced="${l.id}">✔ הוזן במערכת</button></div>`;
   });
   html+='</div>';
   clinicSyncAlert.classList.remove('hidden'); clinicSyncAlert.innerHTML=html;
-  clinicSyncAlert.querySelectorAll('[data-mark-synced]').forEach(btn=>btn.onclick=()=>{
-    state.pendingClinicSync=state.pendingClinicSync.filter(id=>id!==btn.dataset.markSynced);
-    saveState(); renderClinicSyncAlert();
+  clinicSyncAlert.querySelectorAll('[data-mark-synced]').forEach(btn=>btn.onclick=async()=>{
+    const leaveId=btn.dataset.markSynced;
+    btn.disabled=true;
+    const {error}=await sb.from('pending_clinic_sync').delete().eq('leave_id', leaveId);
+    if(error){ alert('שגיאה: '+error.message); btn.disabled=false; return; }
+    await fetchAllData(); renderClinicSyncAlert();
   });
 }
 
@@ -348,8 +384,9 @@ function renderMonth(){
   const first=startOfMonth(anchorDate), last=endOfMonth(anchorDate);
   periodTitle.textContent=`${MONTHS_HE[first.getMonth()]} ${first.getFullYear()}`;
   const gridStart=startOfWeek(first), gridEnd=endOfWeek(last);
-  let html='<div class="month-grid">';
+  let html='<div class="month-weekday-head">';
   DAYS_HE.forEach(d=>html+=`<div class="month-weekday">${d}</div>`);
+  html+='</div><div class="month-grid">';
   dateRange(gridStart,gridEnd).forEach(d=>{
     const leaves=leavesOn(d), cov=coveragesOn(d), risk=riskForDate(d), outside=d.getMonth()!==first.getMonth();
     html+=`<div class="month-day ${outside?'outside':''} ${toISO(d)===toISO(new Date())?'today':''}" data-day="${toISO(d)}"><div class="month-day-num">${d.getDate()}</div>`;
@@ -452,9 +489,11 @@ function renderStaffList(){
   box.innerHTML=state.staff.length?state.staff.map(s=>`<div class="staff-item"><span>${escapeHtml(s.name)}</span><button class="danger" data-remove-staff="${s.id}">הסרה</button></div>`).join(''):'<div class="empty">עדיין לא הוזנו אנשי צוות.</div>';
   box.querySelectorAll('[data-remove-staff]').forEach(btn=>btn.onclick=()=>removeStaff(btn.dataset.removeStaff));
 }
-function removeStaff(id){
+async function removeStaff(id){
   if(state.leaves.some(l=>l.staffId===id)||state.coverages.some(c=>c.staffId===id)){ alert('לא ניתן להסיר עובד שיש לו חופשות או גיבויים רשומים.'); return; }
-  state.staff=state.staff.filter(s=>s.id!==id); saveState(); renderStaffList(); refreshStaffSelects(); render();
+  const {error}=await sb.from('staff').delete().eq('id', id);
+  if(error){ alert('שגיאה במחיקה: '+error.message); return; }
+  await fetchAllData(); renderStaffList(); refreshStaffSelects(); render();
 }
 
 // Events
@@ -476,63 +515,28 @@ content.addEventListener('click', e=>{
   if(addCovEl){ const day=parseDate(addCovEl.dataset.addCoverageDay); openCoverageForDates(day,day,false); return; }
 });
 
-document.getElementById('deleteLeaveBtn').onclick=()=>{
+document.getElementById('deleteLeaveBtn').onclick=async()=>{
   if(!editingLeaveId) return;
   if(!confirm('למחוק את החופשה? הפעולה אינה הפיכה.')) return;
-  state.leaves=state.leaves.filter(l=>l.id!==editingLeaveId);
-  state.pendingClinicSync=state.pendingClinicSync.filter(id=>id!==editingLeaveId);
-  saveState();
-  document.getElementById('leaveDialog').close(); editingLeaveId=null; render();
+  const id=editingLeaveId;
+  const {error}=await sb.from('leaves').delete().eq('id', id);
+  if(error){ alert('שגיאה במחיקה: '+error.message); return; }
+  document.getElementById('leaveDialog').close(); editingLeaveId=null;
+  await fetchAllData(); render();
 };
-document.getElementById('deleteCoverageBtn').onclick=()=>{
+document.getElementById('deleteCoverageBtn').onclick=async()=>{
   if(!editingCoverageId) return;
   if(!confirm('למחוק את הגיבוי? הפעולה אינה הפיכה.')) return;
-  state.coverages=state.coverages.filter(c=>c.id!==editingCoverageId); saveState();
-  document.getElementById('coverageDialog').close(); editingCoverageId=null; render();
+  const id=editingCoverageId;
+  const {error}=await sb.from('coverages').delete().eq('id', id);
+  if(error){ alert('שגיאה במחיקה: '+error.message); return; }
+  document.getElementById('coverageDialog').close(); editingCoverageId=null;
+  await fetchAllData(); render();
 };
 
-document.getElementById('staffForm').addEventListener('submit',e=>{
-  e.preventDefault(); const input=document.getElementById('staffName'), name=input.value.trim(); if(!name) return; state.staff.push({id:uid('staff'),name}); input.value=''; saveState(); renderStaffList(); refreshStaffSelects(); render();
-});
-
-document.getElementById('leaveForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const staffId=document.getElementById('leaveStaff').value, start=document.getElementById('leaveStart').value, end=document.getElementById('leaveEnd').value, note=document.getElementById('leaveNote').value.trim();
-  if(!staffId||!start||!end) return; if(end<start){ alert('תאריך הסיום חייב להיות זהה או מאוחר מתאריך ההתחלה.'); return; }
-  if(editingLeaveId){
-    const idx=state.leaves.findIndex(l=>l.id===editingLeaveId);
-    if(idx>-1) state.leaves[idx]={...state.leaves[idx],staffId,start,end,note};
-  } else {
-    const newId=uid('leave');
-    state.leaves.push({id:newId,staffId,start,end,note});
-    state.pendingClinicSync.push(newId);
-  }
-  saveState(); document.getElementById('leaveDialog').close(); document.getElementById('leaveForm').reset(); editingLeaveId=null; render();
-});
-
-document.getElementById('coverageForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const staffId=document.getElementById('coverageStaff').value, start=document.getElementById('coverageStart').value, end=document.getElementById('coverageEnd').value, from=document.getElementById('coverageFrom').value, to=document.getElementById('coverageTo').value, note=document.getElementById('coverageNote').value.trim();
-  if(!staffId||!start||!end||!from||!to) return; if(end<start){ alert('תאריך הסיום חייב להיות זהה או מאוחר מתאריך ההתחלה.'); return; }
-  if(editingCoverageId){
-    const idx=state.coverages.findIndex(c=>c.id===editingCoverageId);
-    if(idx>-1) state.coverages[idx]={...state.coverages[idx],staffId,start,end,from,to,note};
-  } else {
-    state.coverages.push({id:uid('coverage'),staffId,start,end,from,to,note});
-  }
-  saveState(); document.getElementById('coverageDialog').close(); document.getElementById('coverageForm').reset(); editingCoverageId=null; render();
-});
-
-refreshStaffSelects();
-render();
-
-function updateHeaderHeightVar(){
-  const header = document.querySelector('.app-header');
-  if(header) document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
-}
-updateHeaderHeightVar();
-window.addEventListener('resize', updateHeaderHeightVar);
-
-</script>
-</body>
-</html>
+document.getElementById('staffForm').addEventListener('submit', async e=>{
+  e.preventDefault(); const input=document.getElementById('staffName'), name=input.value.trim(); if(!name) return;
+  input.value='';
+  const {error}=await sb.from('staff').insert({name});
+  if(error){ alert('שגיאה בהוספת איש/אשת צוות: '+error.message); return; }
+  aw
