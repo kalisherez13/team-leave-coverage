@@ -40,6 +40,7 @@ main{max-width:1500px;margin:22px auto;padding:0 18px 40px}
 .legend{margin-top:12px;padding:12px 16px;display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:#475467}.legend span{display:flex;align-items:center;gap:7px}.dot{width:11px;height:11px;border-radius:50%;display:inline-block}.dot.green{background:var(--green)}.dot.orange{background:var(--orange)}.dot.red{background:var(--red)}.dot.gray{background:var(--gray)}.dot.unresolved{background:#7c3aed}
 .coverage-alert{margin-bottom:12px;padding:13px 16px;border:1px solid #fda29b;background:#fff1f0;border-radius:14px;color:#912018;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:12px}.hidden{display:none!important}
 .clinic-sync-alert{margin-bottom:12px;padding:13px 16px;border:1px solid var(--blue);background:var(--blue-bg);border-radius:14px;color:#1e3a8a}.sync-header{font-weight:600;margin-bottom:8px}.sync-list{display:flex;flex-direction:column;gap:6px}.sync-item{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid #bfdbfe;border-radius:10px;padding:7px 10px;font-size:13px}.sync-done-btn{border:1px solid #16a34a;color:#16a34a;background:#fff;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:600;white-space:nowrap}.sync-done-btn:hover{background:#f0fdf4}
+.coverage-sync-alert{margin-bottom:12px;padding:13px 16px;border:1px solid #0d9488;background:#f0fdfa;border-radius:14px;color:#115e59}
 .notes-board{margin-bottom:14px;padding:14px 16px;border:2px solid #f59e0b;background:#fffbeb;box-shadow:0 2px 10px rgba(245,158,11,.18)}.notes-header{font-weight:700;color:#92400e;margin-bottom:10px;font-size:15px}.notes-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}.note-item{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid #fde68a;border-radius:10px;padding:8px 10px;font-size:13px}.note-done-btn{border:1px solid #16a34a;color:#16a34a;background:#fff;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:600;white-space:nowrap}.note-done-btn:hover{background:#f0fdf4}
 .content-card{margin-top:12px;padding:16px;min-height:460px}
 .table-scroll{overflow-x:auto}
@@ -52,7 +53,7 @@ main{max-width:1500px;margin:22px auto;padding:0 18px 40px}
 .event-segment{border-radius:9px;padding:7px 10px;font-size:13px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid transparent}.leave-green{background:var(--green-bg);color:#166534;border-color:#86efac}.leave-orange{background:var(--orange-bg);color:#9a3412;border-color:#fdba74}.leave-red{background:var(--red-bg);color:#991b1b;border-color:#fca5a5}.coverage-segment{background:var(--gray-bg);color:#344054;border-color:#cfd4dc}.unresolved-segment{box-shadow:inset 0 -3px 0 #7c3aed}
 
 .month-weekday-head{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:7px;position:sticky;top:var(--header-height,86px);background:#fff;z-index:3;padding-bottom:6px}
-.month-grid{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:7px}.month-weekday{font-size:12px;color:var(--muted);text-align:center;padding:5px}.month-day{min-height:125px;border:1px solid var(--border);border-radius:12px;padding:7px;background:#fff}.month-day.outside{opacity:.35}.month-day.today{outline:2px solid var(--blue)}.month-day-num{font-weight:700;margin-bottom:6px}.mini-chip{display:block;border-radius:7px;padding:4px 6px;margin:4px 0;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.coverage-chip{background:var(--gray-bg);color:#344054}.missing-badge{display:inline-block;background:#f4ebff;color:#6941c6;padding:2px 6px;border-radius:999px;font-size:10px;margin-top:3px}
+.month-grid{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:7px}.month-weekday{font-size:12px;color:var(--muted);text-align:center;padding:5px}.month-day{height:122px;border:1px solid var(--border);border-radius:12px;padding:7px 7px 32px;background:#fff;position:relative;overflow:hidden}.month-day.outside{opacity:.35}.month-day.today{outline:2px solid var(--blue)}.month-day-top{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-bottom:5px}.month-day-num{font-weight:700;font-size:13px}.unresolved-dot{width:8px;height:8px;border-radius:50%;background:#7c3aed;flex-shrink:0}.month-day-items{display:flex;flex-direction:column;gap:3px;overflow:hidden}.mini-chip{display:block;border-radius:7px;padding:3px 6px;font-size:10.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.coverage-chip{background:var(--gray-bg);color:#344054}.more-chip{background:#f2f4f7;color:var(--muted);font-weight:600;text-align:center}
 
 .year-grid{display:grid;grid-template-columns:repeat(3,minmax(280px,1fr));gap:14px}.mini-month{border:1px solid var(--border);border-radius:14px;padding:12px}.mini-month h3{margin:0 0 9px}.mini-month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}.mini-day{aspect-ratio:1/1;border-radius:5px;background:#f2f4f7;font-size:9px;display:flex;align-items:center;justify-content:center;position:relative}.mini-day.green{background:var(--green-bg);color:#166534}.mini-day.orange{background:var(--orange-bg);color:#9a3412}.mini-day.red{background:var(--red-bg);color:#991b1b}.mini-day.missing::after{content:"";position:absolute;bottom:1px;width:5px;height:2px;border-radius:2px;background:#7c3aed}.mini-day.has-coverage::before{content:"";position:absolute;top:1px;width:4px;height:4px;border-radius:50%;background:var(--gray)}
 
@@ -61,7 +62,7 @@ table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px s
 
 dialog{border:none;border-radius:18px;width:min(560px,94vw);padding:0;box-shadow:0 20px 60px rgba(16,24,40,.22)}dialog::backdrop{background:rgba(16,24,40,.45)}.dialog-form{padding:20px;display:flex;flex-direction:column;gap:14px}.dialog-title-row{display:flex;justify-content:space-between;align-items:center}.dialog-title-row h2{margin:0}.icon-btn{border:none;background:transparent;font-size:18px;padding:5px}.dialog-form label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}.dialog-form input,.dialog-form select{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff}.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}.dialog-actions{display:flex;justify-content:flex-start;gap:8px}.dialog-actions .danger{margin-inline-end:auto;border-color:#fda29b}.hint{margin:0;font-size:12px;line-height:1.55;color:var(--muted);background:#f9fafb;padding:10px;border-radius:10px}.coverage-reason{background:#fff1f0;border:1px solid #fda29b;color:#912018;padding:10px;border-radius:10px;font-size:13px}.inline-form{display:flex;gap:8px}.inline-form input{flex:1}.staff-list{display:flex;flex-direction:column;gap:7px;margin-top:4px}.staff-item{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);padding:9px 10px;border-radius:10px}
 .event-segment{cursor:pointer}.event-segment:hover{filter:brightness(0.95)}.mini-chip{cursor:pointer}.mini-chip:hover{filter:brightness(0.95)}
-.missing-badge{cursor:pointer}.missing-badge:hover{filter:brightness(0.95)}.add-coverage-day-btn{display:block;width:100%;margin-top:5px;border:1px dashed var(--border);background:transparent;border-radius:7px;padding:3px 6px;font-size:10px;color:var(--muted);cursor:pointer}.add-coverage-day-btn:hover{border-color:var(--blue);color:var(--blue);background:#eff6ff}
+.add-coverage-day-btn{position:absolute;bottom:7px;right:7px;width:23px;height:23px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;padding:0;border:1px solid var(--border);background:#fff;color:var(--muted);cursor:pointer}.add-coverage-day-btn:hover{border-color:var(--blue);color:var(--blue);background:#eff6ff}
 
 @media(max-width:900px){.app-header{align-items:flex-start;flex-direction:column}.year-grid{grid-template-columns:1fr}.report-summary{grid-template-columns:1fr 1fr}.week-head,.event-row{grid-template-columns:repeat(7,minmax(90px,1fr))}.month-weekday-head,.month-grid{grid-template-columns:repeat(7,minmax(90px,1fr))}.content-card{padding:10px}}
 @media(max-width:480px){
@@ -74,11 +75,11 @@ dialog{border:none;border-radius:18px;width:min(560px,94vw);padding:0;box-shadow
   .day-head .dow{font-size:8px}
   .event-segment{padding:4px 2px;font-size:9px;border-radius:6px}
   .month-weekday{font-size:9px;padding:2px}
-  .month-day{min-height:68px;padding:3px;border-radius:8px}
-  .month-day-num{font-size:11px;margin-bottom:2px}
-  .mini-chip{font-size:8px;padding:2px 3px;margin:2px 0;border-radius:5px}
-  .missing-badge{font-size:7px;padding:1px 4px}
-  .add-coverage-day-btn{font-size:7px;padding:2px 3px;margin-top:2px}
+  .month-day{height:78px;padding:4px 4px 26px;border-radius:8px}
+  .month-day-num{font-size:11px}
+  .unresolved-dot{width:6px;height:6px}
+  .mini-chip{font-size:8px;padding:2px 3px;border-radius:5px}
+  .add-coverage-day-btn{width:18px;height:18px;font-size:12px;bottom:4px;right:4px}
   .legend{gap:8px 12px;font-size:11px;padding:8px 10px}
 }
 
@@ -108,6 +109,7 @@ dialog{border:none;border-radius:18px;width:min(560px,94vw);padding:0;box-shadow
     </section>
 
     <section id="clinicSyncAlert" class="clinic-sync-alert hidden" aria-live="polite"></section>
+    <section id="coverageSyncAlert" class="coverage-sync-alert hidden" aria-live="polite"></section>
     <section id="coverageAlert" class="coverage-alert hidden" aria-live="polite"></section>
 
     <section class="toolbar card">
@@ -232,6 +234,7 @@ const initialState = {
   coverages: [],
   settings: { coverageRequiredFromAbsentCount: 1 },
   pendingClinicSync: [],
+  pendingCoverageSync: [],
   notes: []
 };
 
@@ -253,15 +256,16 @@ function mapCoverageRow(r){ return {id:r.id, staffId:r.staff_id, start:r.start_d
 function mapNoteRow(r){ return {id:r.id, text:r.text}; }
 
 async function fetchAllData(){
-  const [staffRes, leavesRes, covRes, syncRes, notesRes] = await Promise.all([
+  const [staffRes, leavesRes, covRes, syncRes, notesRes, covSyncRes] = await Promise.all([
     sb.from('staff').select('*').order('name'),
     sb.from('leaves').select('*'),
     sb.from('coverages').select('*'),
     sb.from('pending_clinic_sync').select('*'),
-    sb.from('notes').select('*').order('created_at')
+    sb.from('notes').select('*').order('created_at'),
+    sb.from('pending_coverage_sync').select('*')
   ]);
-  if(staffRes.error||leavesRes.error||covRes.error||syncRes.error||notesRes.error){
-    console.error(staffRes.error||leavesRes.error||covRes.error||syncRes.error||notesRes.error);
+  if(staffRes.error||leavesRes.error||covRes.error||syncRes.error||notesRes.error||covSyncRes.error){
+    console.error(staffRes.error||leavesRes.error||covRes.error||syncRes.error||notesRes.error||covSyncRes.error);
     content.innerHTML='<div class="empty">שגיאה בטעינת הנתונים מהשרת. בדוק חיבור לאינטרנט ורענן.</div>';
     return false;
   }
@@ -270,6 +274,7 @@ async function fetchAllData(){
   state.coverages=(covRes.data||[]).map(mapCoverageRow);
   state.pendingClinicSync=(syncRes.data||[]).map(r=>r.leave_id);
   state.notes=(notesRes.data||[]).map(mapNoteRow);
+  state.pendingCoverageSync=(covSyncRes.data||[]).map(r=>r.coverage_id);
   return true;
 }
 
@@ -285,6 +290,7 @@ function subscribeRealtime(){
     .on('postgres_changes',{event:'*',schema:'public',table:'coverages'},scheduleRefresh)
     .on('postgres_changes',{event:'*',schema:'public',table:'pending_clinic_sync'},scheduleRefresh)
     .on('postgres_changes',{event:'*',schema:'public',table:'notes'},scheduleRefresh)
+    .on('postgres_changes',{event:'*',schema:'public',table:'pending_coverage_sync'},scheduleRefresh)
     .subscribe();
 }
 
@@ -356,9 +362,30 @@ function renderNotesBoard(){
   });
 }
 
+function renderCoverageSyncAlert(){
+  const el=document.getElementById('coverageSyncAlert');
+  const pending=state.pendingCoverageSync.map(id=>state.coverages.find(c=>c.id===id)).filter(Boolean);
+  if(!pending.length){ el.classList.add('hidden'); el.innerHTML=''; return; }
+  const sorted=pending.slice().sort((a,b)=>a.start.localeCompare(b.start));
+  let html=`<div class="sync-header">🧑‍⚕️ יש ${sorted.length} ${sorted.length===1?'גיבוי חדש שטרם הוכנס':'גיבויים חדשים שטרם הוכנסו'} ליומן — יש לסמן ✔ אחרי ההזנה:</div><div class="sync-list">`;
+  sorted.forEach(c=>{
+    const range = c.start===c.end ? formatDate(parseDate(c.start)) : `${formatDate(parseDate(c.start))}–${formatDate(parseDate(c.end))}`;
+    html+=`<div class="sync-item"><span>${escapeHtml(staffName(c.staffId))} · ${range} · ${c.from}–${c.to}</span><button type="button" class="sync-done-btn" data-cov-synced="${c.id}">✔ הוכנס ליומן</button></div>`;
+  });
+  html+='</div>';
+  el.classList.remove('hidden'); el.innerHTML=html;
+  el.querySelectorAll('[data-cov-synced]').forEach(btn=>btn.onclick=async()=>{
+    const covId=btn.dataset.covSynced; btn.disabled=true;
+    const {error}=await sb.from('pending_coverage_sync').delete().eq('coverage_id', covId);
+    if(error){ alert('שגיאה: '+error.message); btn.disabled=false; return; }
+    await fetchAllData(); renderCoverageSyncAlert();
+  });
+}
+
 function render(){
   updateCoverageAlert();
   renderClinicSyncAlert();
+  renderCoverageSyncAlert();
   renderNotesBoard();
   document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active', b.dataset.view===currentView));
   dateNav.classList.toggle('hidden', currentView==='reports');
@@ -415,13 +442,21 @@ function renderMonth(){
   let html='<div class="month-weekday-head">';
   DAYS_HE.forEach(d=>html+=`<div class="month-weekday">${d}</div>`);
   html+='</div><div class="month-grid">';
+  const MAX_ITEMS=2;
   dateRange(gridStart,gridEnd).forEach(d=>{
     const leaves=leavesOn(d), cov=coveragesOn(d), risk=riskForDate(d), outside=d.getMonth()!==first.getMonth();
-    html+=`<div class="month-day ${outside?'outside':''} ${toISO(d)===toISO(new Date())?'today':''}" data-day="${toISO(d)}"><div class="month-day-num">${d.getDate()}</div>`;
-    leaves.forEach(l=>html+=`<span class="mini-chip leave-${risk}" data-leave-id="${l.id}">${escapeHtml(staffName(l.staffId))}</span>`);
-    cov.forEach(c=>html+=`<span class="mini-chip coverage-chip" data-coverage-id="${c.id}">גיבוי: ${escapeHtml(staffName(c.staffId))} ${c.from}–${c.to}</span>`);
-    if(isUnresolved(d)) html+='<span class="missing-badge" data-add-coverage-day="'+toISO(d)+'">דורש גיבוי · הוספת גיבוי</span>';
-    html+='<button type="button" class="add-coverage-day-btn" data-add-coverage-day="'+toISO(d)+'" title="הוספת גיבוי ליום זה">+ גיבוי</button>';
+    const items=[
+      ...leaves.map(l=>({chip:`<span class="mini-chip leave-${risk}" data-leave-id="${l.id}" title="${escapeHtml(staffName(l.staffId))} | ${formatDate(parseDate(l.start))}–${formatDate(parseDate(l.end))}">${escapeHtml(staffName(l.staffId))}</span>`})),
+      ...cov.map(c=>({chip:`<span class="mini-chip coverage-chip" data-coverage-id="${c.id}" title="${escapeHtml(staffName(c.staffId))} | ${c.from}–${c.to}">גיבוי: ${escapeHtml(staffName(c.staffId))}</span>`}))
+    ];
+    const shown=items.slice(0,MAX_ITEMS), extra=items.length-MAX_ITEMS;
+    html+=`<div class="month-day ${outside?'outside':''} ${toISO(d)===toISO(new Date())?'today':''}" data-day="${toISO(d)}">`;
+    html+=`<div class="month-day-top"><span class="month-day-num">${d.getDate()}</span>${isUnresolved(d)?'<span class="unresolved-dot" title="דורש גיבוי"></span>':''}</div>`;
+    html+='<div class="month-day-items">';
+    shown.forEach(it=>html+=it.chip);
+    if(extra>0) html+=`<span class="mini-chip more-chip">+${extra} נוספים</span>`;
+    html+='</div>';
+    html+=`<button type="button" class="add-coverage-day-btn" data-add-coverage-day="${toISO(d)}" title="הוספת גיבוי ליום זה">+</button>`;
     html+='</div>';
   });
   html+='</div>'; content.innerHTML=html;
@@ -598,8 +633,10 @@ document.getElementById('coverageForm').addEventListener('submit', async e=>{
     const {error}=await sb.from('coverages').update({staff_id:staffId,start_date:start,end_date:end,from_time:from,to_time:to,note}).eq('id', id);
     if(error){ alert('שגיאה בעדכון הגיבוי: '+error.message); return; }
   } else {
-    const {error}=await sb.from('coverages').insert({staff_id:staffId,start_date:start,end_date:end,from_time:from,to_time:to,note});
+    const {data, error}=await sb.from('coverages').insert({staff_id:staffId,start_date:start,end_date:end,from_time:from,to_time:to,note}).select().single();
     if(error){ alert('שגיאה בהוספת הגיבוי: '+error.message); return; }
+    const {error:syncErr}=await sb.from('pending_coverage_sync').insert({coverage_id:data.id});
+    if(syncErr) console.error(syncErr);
   }
   await fetchAllData(); render();
 });
